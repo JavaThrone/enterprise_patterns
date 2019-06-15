@@ -50,7 +50,7 @@ public class OrderControllerTest {
     @Test
     void makeOrder_validBookId_returnOrder() throws IOException {
         BookDTO bookDTO = new BookDTO();
-        bookDTO.setId(1);
+        bookDTO.setId(100);
         bookDTO.setPrice(200);
 
         bookMockServer.expect(requestTo(env.getProperty("book.service.url")
@@ -64,5 +64,4 @@ public class OrderControllerTest {
         assertEquals(bookDTO.getId(), order.getBookId());
         assertEquals(bookDTO.getPrice(), order.getPrice());
     }
-
 }
