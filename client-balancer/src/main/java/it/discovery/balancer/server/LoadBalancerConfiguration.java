@@ -2,12 +2,14 @@ package it.discovery.balancer.server;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
-@Getter @Setter
+@Getter
+@Setter
+@Validated
 public class LoadBalancerConfiguration {
 
     @NotEmpty

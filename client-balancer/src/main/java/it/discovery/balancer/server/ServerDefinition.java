@@ -17,7 +17,7 @@ public class ServerDefinition {
     private String url;
 
     @NotNull
-    @Min(3)
+    @Size(min = 3)
     private String zone;
 
     private boolean enabled = true;

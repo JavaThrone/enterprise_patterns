@@ -1,15 +1,12 @@
 server:
   port: 9000
-book:
-  service:
-    url: http://localhost:8080/book
 
 load:
   balancer:
     servers:
       - id: primary
         url: http://localhost:8080
-        zone:
+        zone: Ukraine
         enabled: true
       - id: slave
         url: http://localhost:8085
