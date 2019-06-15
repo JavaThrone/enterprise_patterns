@@ -12,7 +12,7 @@ public class BookClient {
     private final RestTemplate restTemplate;
 
     public BookClient(Environment env) {
-        baseUrl = env.getProperty("book.service.url", "http://localhost:8080/");
+        baseUrl = env.getProperty("book.service.url", "http://localhost:8080/book");
         restTemplate = new RestTemplate();
     }
 

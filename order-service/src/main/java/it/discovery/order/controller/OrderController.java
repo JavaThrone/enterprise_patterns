@@ -4,11 +4,10 @@ import it.discovery.order.BookClient;
 import it.discovery.order.model.Order;
 import it.discovery.order.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("order")
@@ -25,6 +24,11 @@ public class OrderController {
 		order.setBookId(bookId);
 		order.setPrice(bookClient.findById(1).getBody().getPrice());
 		orderRepository.save(order);
+	}
+
+	@GetMapping
+	public List<Order> findAll() {
+		return orderRepository.findAll();
 	}
 
 }
