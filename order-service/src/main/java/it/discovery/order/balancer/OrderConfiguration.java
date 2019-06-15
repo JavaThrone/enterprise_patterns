@@ -2,13 +2,14 @@ package it.discovery.order.balancer;
 
 import it.discovery.balancer.api.HealthCheckService;
 import it.discovery.balancer.api.LoadBalancer;
-import it.discovery.balancer.api.impl.NoOpHealthCheckService;
+import it.discovery.balancer.api.impl.ActuatorHealthCheckService;
 import it.discovery.balancer.api.impl.RandomLoadBalancer;
 import it.discovery.balancer.server.LoadBalancerConfiguration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestTemplate;
 
 @Configuration
 @EnableConfigurationProperties
@@ -21,9 +22,8 @@ public class OrderConfiguration {
     }
 
     @Bean
-    public HealthCheckService healthCheckService(LoadBalancerConfiguration
-                                                 loadBalancerConfiguration) {
-        return new NoOpHealthCheckService(loadBalancerConfiguration());
+    public HealthCheckService healthCheckService(RestTemplate restTemplate) {
+        return new ActuatorHealthCheckService(restTemplate, loadBalancerConfiguration());
     }
 
     @Bean
