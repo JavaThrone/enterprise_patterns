@@ -22,5 +22,10 @@
 			<groupId>com.jayway.jsonpath</groupId>
 			<artifactId>json-path</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>it.discovery</groupId>
+			<artifactId>client-balancer</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 </project>

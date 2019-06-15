@@ -3,3 +3,15 @@ server:
 book:
   service:
     url: http://localhost:8080/book
+
+load:
+  balancer:
+    servers:
+      - id: primary
+        host: http://localhost:8080
+        zone: Ukraine
+        enabled:true
+      - id: slave
+        host: http://localhost:8085
+        zone: West-Europe
+        enabled: true
