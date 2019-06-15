@@ -19,11 +19,11 @@ public class OrderController {
 	private final BookClient bookClient;
 
 	@PostMapping("{bookId}")
-	public void makeOrder(@PathVariable int bookId) {
+	public Order makeOrder(@PathVariable int bookId) {
 		Order order = new Order();
 		order.setBookId(bookId);
 		order.setPrice(bookClient.findById(1).getBody().getPrice());
-		orderRepository.save(order);
+		return orderRepository.save(order);
 	}
 
 	@GetMapping
