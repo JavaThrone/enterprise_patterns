@@ -1,4 +1,4 @@
-package it.discovery.order;
+package it.discovery.order.client;
 
 import it.discovery.order.dto.BookDTO;
 import lombok.RequiredArgsConstructor;
