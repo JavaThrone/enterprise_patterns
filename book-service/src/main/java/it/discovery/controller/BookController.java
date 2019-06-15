@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -21,21 +22,18 @@ import it.discovery.model.Book;
 import it.discovery.repository.BookRepository;
 
 @RestController
-@RequestMapping("/book")
+@RequestMapping("book")
+@RequiredArgsConstructor
 public class BookController {
 
 	private final BookRepository bookRepository;
-
-	public BookController(BookRepository bookRepository) {
-		this.bookRepository = bookRepository;
-	}
 
 	@GetMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public List<Book> getBooks() {
 		return bookRepository.findAll();
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping("{id}")
 	public ResponseEntity<Book> findBookById(@PathVariable int id) {
 		if (id <= 0) {
 			throw new BookValidationException(String.format("Book id is not valid: %s", id));
@@ -51,7 +49,7 @@ public class BookController {
 		bookRepository.save(book);
 	}
 
-	@PutMapping("/{id}")
+	@PutMapping("{id}")
 	public void updateBook(@PathVariable int id, @Valid @RequestBody Book book) {
 		bookRepository.save(book);
 	}
