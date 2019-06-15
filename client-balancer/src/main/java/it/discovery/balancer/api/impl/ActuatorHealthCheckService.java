@@ -6,10 +6,12 @@ import it.discovery.balancer.server.ServerDefinition;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ActuatorHealthCheckService implements HealthCheckService {
@@ -25,6 +27,23 @@ public class ActuatorHealthCheckService implements HealthCheckService {
                 .stream()
                 .map(serverDefinition -> new RuntimeServerInfo(serverDefinition))
                 .collect(Collectors.toList());
+    }
+
+    @Scheduled(initialDelay = 10000, fixedDelay = 30000)
+    public void checkStatus() {
+        servers.stream()
+                .forEach(server -> {
+                    server.setEnabled(isEnabled(
+                            server.getServerDefinition()));
+                    server.setLastStatusChecked(LocalDateTime.now());
+                });
+    }
+
+    private boolean isEnabled(ServerDefinition serverDefinition) {
+        return restTemplate.getForEntity(serverDefinition.getUrl()
+                + "/actuator/health", Map.class)
+                .getBody().get("status")
+                .equals("UP");
     }
 
     @Override
