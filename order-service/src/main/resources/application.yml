@@ -9,7 +9,7 @@ load:
     servers:
       - id: primary
         url: http://localhost:8080
-        zone: Ukraine
+        zone:
         enabled: true
       - id: slave
         url: http://localhost:8085
