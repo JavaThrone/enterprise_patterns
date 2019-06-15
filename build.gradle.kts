@@ -29,6 +29,9 @@ subprojects {
         compile("org.apache.commons:commons-lang3")
         compile("org.hibernate:hibernate-entitymanager")
 
+        compile("org.springframework.data:spring-data-jpa")
+        runtime("com.h2database:h2:1.4.199")
+
         runtime("javax.xml.bind:jaxb-api:2.3.0")
         runtime("javax.annotation:javax.annotation-api:1.3.1")
 
@@ -38,6 +41,7 @@ subprojects {
         testCompile("org.junit.jupiter:junit-jupiter-api")
         testRuntime("org.junit.jupiter:junit-jupiter-engine")
         testCompile("org.springframework.boot:spring-boot-starter-test")
+        
 
     }
 }
