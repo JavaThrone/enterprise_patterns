@@ -1,5 +1,6 @@
 server:
   port: 9000
+  zone: Ukraine
 
 load:
   balancer:
