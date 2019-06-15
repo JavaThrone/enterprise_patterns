@@ -6,7 +6,10 @@ import it.discovery.balancer.server.ServerDefinition;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
@@ -14,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Slf4j
 public class ActuatorHealthCheckService implements HealthCheckService {
 
     private final RestTemplate restTemplate;
@@ -25,7 +29,8 @@ public class ActuatorHealthCheckService implements HealthCheckService {
         this.restTemplate = restTemplate;
         servers = loadBalancerConfiguration.getServers()
                 .stream()
-                .map(serverDefinition -> new RuntimeServerInfo(serverDefinition))
+                .map(serverDefinition -> new RuntimeServerInfo(
+                        serverDefinition))
                 .collect(Collectors.toList());
     }
 
@@ -33,23 +38,29 @@ public class ActuatorHealthCheckService implements HealthCheckService {
     public void checkStatus() {
         servers.stream()
                 .forEach(server -> {
-                    server.setEnabled(isEnabled(
+                    server.setAlive(isAlive(
                             server.getServerDefinition()));
                     server.setLastStatusChecked(LocalDateTime.now());
                 });
     }
 
-    private boolean isEnabled(ServerDefinition serverDefinition) {
-        return restTemplate.getForEntity(serverDefinition.getUrl()
-                + "/actuator/health", Map.class)
-                .getBody().get("status")
-                .equals("UP");
+    private boolean isAlive(ServerDefinition serverDefinition) {
+        try {
+            ResponseEntity<Map> responseEntity = restTemplate.getForEntity(serverDefinition.getUrl()
+                    + "/actuator/health", Map.class);
+            return responseEntity.getStatusCode().is2xxSuccessful()
+                    && responseEntity.getBody().get("status")
+                    .equals("UP");
+        } catch (RestClientException ex) {
+            log.error(ex.getMessage(), ex);
+            return false;
+        }
     }
 
     @Override
     public List<ServerDefinition> getAvailableServers() {
         return servers.stream()
-                .filter(RuntimeServerInfo::isEnabled)
+                .filter(RuntimeServerInfo::isAlive)
                 .map(RuntimeServerInfo::getServerDefinition)
                 .collect(Collectors.toList());
     }
@@ -60,7 +71,7 @@ public class ActuatorHealthCheckService implements HealthCheckService {
     public static class RuntimeServerInfo {
         private final ServerDefinition serverDefinition;
 
-        private boolean enabled;
+        private boolean alive;
 
         private LocalDateTime lastStatusChecked;
     }
