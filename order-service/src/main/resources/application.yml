@@ -8,10 +8,10 @@ load:
   balancer:
     servers:
       - id: primary
-        host: http://localhost:8080
+        url: http://localhost:8080
         zone: Ukraine
-        enabled:true
+        enabled: true
       - id: slave
-        host: http://localhost:8085
+        url: http://localhost:8085
         zone: West-Europe
         enabled: true
