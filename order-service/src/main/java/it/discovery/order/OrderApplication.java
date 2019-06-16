@@ -10,6 +10,7 @@ import it.discovery.balancer.config.CircuitBreakerConfig;
 import it.discovery.balancer.config.RetryConfiguration;
 import it.discovery.balancer.server.LoadBalancerConfiguration;
 import it.discovery.order.client.BookClient;
+import it.discovery.order.config.CacheConfiguration;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -32,8 +33,8 @@ public class OrderApplication {
 
     @Bean
     public BookClient bookClient(RestTemplate restTemplate,
-                                 LoadBalancer loadBalancer) {
-        return new BookClient(restTemplate, loadBalancer);
+                                 LoadBalancer loadBalancer, CacheConfiguration cacheConfiguration) {
+        return new BookClient(restTemplate, loadBalancer, cacheConfiguration);
     }
 
     @Bean

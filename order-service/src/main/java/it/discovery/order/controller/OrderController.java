@@ -21,7 +21,7 @@ public class OrderController {
 	public Order makeOrder(@PathVariable int bookId) {
 		Order order = new Order();
 		order.setBookId(bookId);
-		order.setPrice(bookClient.findById(bookId).getBody().getPrice());
+		order.setPrice(bookClient.findById(bookId).getPrice());
 		return orderRepository.save(order);
 	}
 

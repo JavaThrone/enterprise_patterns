@@ -3,6 +3,7 @@ package it.discovery.order.balancer;
 import it.discovery.balancer.config.CircuitBreakerConfig;
 import it.discovery.balancer.config.RetryConfiguration;
 import it.discovery.balancer.server.LoadBalancerConfiguration;
+import it.discovery.order.config.CacheConfiguration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -28,5 +29,11 @@ public class OrderConfiguration {
     @ConfigurationProperties("circuit-config")
     public CircuitBreakerConfig circuitBreakerConfig() {
         return new CircuitBreakerConfig();
+    }
+
+    @Bean
+    @ConfigurationProperties("cache-config")
+    public CacheConfiguration cacheConfiguration() {
+        return new CacheConfiguration();
     }
 }

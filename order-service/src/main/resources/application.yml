@@ -2,6 +2,9 @@ server:
   port: 9000
   zone: Ukraine
 
+cache-config:
+  maxSize: 1000
+  expiresAfterAccess: 10000
 retry-config:
   maxAttempts: 3
   maxDuration: 30000

@@ -18,4 +18,8 @@ public class RetryConfiguration {
 
     @Positive
     private long maxDuration;
+
+    public int getMaxAttempts() {
+        return maxAttempts;
+    }
 }
