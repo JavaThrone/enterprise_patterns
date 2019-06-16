@@ -7,10 +7,8 @@ import net.jodah.failsafe.Failsafe;
 import net.jodah.failsafe.FailsafeExecutor;
 import net.jodah.failsafe.RetryPolicy;
 import org.springframework.http.HttpMethod;
-import org.springframework.web.client.RequestCallback;
-import org.springframework.web.client.ResponseExtractor;
-import org.springframework.web.client.RestClientException;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.retry.annotation.Retryable;
+import org.springframework.web.client.*;
 
 import java.net.URI;
 import java.time.Duration;
@@ -39,6 +37,7 @@ public class RetryableRestTemplate extends RestTemplate{
     }
 
     @Override
+    @Retryable(include = ResourceAccessException.class, maxAttempts = 3)
     protected <T> T doExecute(URI url, HttpMethod method,
                               RequestCallback requestCallback, ResponseExtractor<T> responseExtractor) throws RestClientException {
         FailsafeExecutor<Object> failsafe = Failsafe.with(retryPolicy, circuitBreaker);
