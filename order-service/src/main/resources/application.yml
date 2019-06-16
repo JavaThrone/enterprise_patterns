@@ -12,6 +12,7 @@ circuit-config:
   delay: 10000
 load:
   balancer:
+    type: metrics
     servers:
       - id: primary
         url: http://localhost:8080

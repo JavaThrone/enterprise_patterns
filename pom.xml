@@ -111,5 +111,6 @@
 		<module>order-service</module>
 		<module>client-balancer</module>
 		<module>server-balancer</module>
-	</modules>
+        <module>spring-boot-starter-load-balancer</module>
+    </modules>
 </project>

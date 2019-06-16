@@ -24,7 +24,7 @@
 		</dependency>
 		<dependency>
 			<groupId>it.discovery</groupId>
-			<artifactId>client-balancer</artifactId>
+			<artifactId>spring-boot-starter-load-balancer</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
