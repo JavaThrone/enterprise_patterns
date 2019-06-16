@@ -24,12 +24,14 @@ public class RetryableRestTemplate extends RestTemplate{
     public RetryableRestTemplate(RetryConfiguration retryConfiguration,
                                  CircuitBreakerConfig circuitBreakerConfig) {
         retryPolicy = new RetryPolicy<>()
+                .handle(RestClientException.class)
                 .withDelay(Duration.ofMillis(
                         retryConfiguration.getDelay()))
                 .withMaxAttempts(retryConfiguration.getMaxAttempts())
                 .withMaxDuration(Duration.ofMillis(
                         retryConfiguration.getMaxDuration()));
         circuitBreaker = new CircuitBreaker<>()
+                .handle(RestClientException.class)
                 .withFailureThreshold(circuitBreakerConfig.getFailureThresholds())
                 .withSuccessThreshold(circuitBreakerConfig.getSuccessThresholds())
                 .withDelay(Duration.ofMillis(circuitBreakerConfig.getDelay()));
