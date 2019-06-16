@@ -24,12 +24,12 @@ public class GeographicLoadBalancer implements LoadBalancer {
 
     @Override
     public Optional<ServerDefinition> chooseServer() {
-        List<ServerDefinition> availableServers = healthCheckService.getAvailableServers();
+        var availableServers = healthCheckService.getAvailableServers();
         if (availableServers.isEmpty()) {
             return Optional.empty();
         }
 
-        Optional<ServerDefinition> validServer = availableServers.stream()
+        var validServer = availableServers.stream()
                 .filter(server -> server.getZone().equals(serverZone))
                 .findFirst();
 

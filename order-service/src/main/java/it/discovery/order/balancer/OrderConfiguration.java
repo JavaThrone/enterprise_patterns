@@ -1,6 +1,7 @@
 package it.discovery.order.balancer;
 
-import it.discovery.balancer.RetryConfiguration;
+import it.discovery.balancer.config.CircuitBreakerConfig;
+import it.discovery.balancer.config.RetryConfiguration;
 import it.discovery.balancer.api.HealthCheckService;
 import it.discovery.balancer.api.LoadBalancer;
 import it.discovery.balancer.api.impl.ActuatorHealthCheckService;
@@ -26,6 +27,12 @@ public class OrderConfiguration {
     @ConfigurationProperties("retry-config")
     public RetryConfiguration retryConfiguration() {
         return  new RetryConfiguration();
+    }
+
+    @Bean
+    @ConfigurationProperties("circuit-config")
+    public CircuitBreakerConfig circuitBreakerConfig() {
+        return new CircuitBreakerConfig();
     }
 
     @Bean

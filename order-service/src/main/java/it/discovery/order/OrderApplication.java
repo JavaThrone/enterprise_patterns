@@ -1,13 +1,13 @@
 package it.discovery.order;
 
-import it.discovery.balancer.RetryConfiguration;
+import it.discovery.balancer.config.CircuitBreakerConfig;
+import it.discovery.balancer.config.RetryConfiguration;
 import it.discovery.balancer.api.LoadBalancer;
 import it.discovery.balancer.client.RetryableRestTemplate;
 import it.discovery.order.client.BookClient;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -31,8 +31,9 @@ public class OrderApplication {
     @Bean
     @Primary
     @Qualifier("retry")
-    public RestTemplate restTemplate(RetryConfiguration retryConfiguration) {
-        return new RetryableRestTemplate(retryConfiguration);
+    public RestTemplate restTemplate(RetryConfiguration retryConfiguration,
+                                     CircuitBreakerConfig circuitBreakerConfig) {
+        return new RetryableRestTemplate(retryConfiguration, circuitBreakerConfig);
     }
 
     @Bean

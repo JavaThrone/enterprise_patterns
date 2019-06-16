@@ -6,6 +6,10 @@ retry-config:
   maxAttempts: 3
   maxDuration: 30000
   delay: 3000
+circuit-config:
+  failureThresholds: 5
+  successThresholds: 3
+  delay: 10000
 load:
   balancer:
     servers:
