@@ -34,7 +34,7 @@ public class ActuatorHealthCheckService implements HealthCheckService {
                 .collect(Collectors.toList());
     }
 
-    @Scheduled(initialDelay = 10000, fixedDelay = 30000)
+    @Scheduled(initialDelay = 1000, fixedDelay = 30000)
     public void checkStatus() {
         servers.stream()
                 .forEach(server -> {
