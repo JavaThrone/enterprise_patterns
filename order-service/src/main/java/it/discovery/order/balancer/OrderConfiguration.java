@@ -1,5 +1,6 @@
 package it.discovery.order.balancer;
 
+import it.discovery.balancer.RetryConfiguration;
 import it.discovery.balancer.api.HealthCheckService;
 import it.discovery.balancer.api.LoadBalancer;
 import it.discovery.balancer.api.impl.ActuatorHealthCheckService;
@@ -19,6 +20,12 @@ public class OrderConfiguration {
     @ConfigurationProperties("load.balancer")
     public LoadBalancerConfiguration loadBalancerConfiguration() {
         return new LoadBalancerConfiguration();
+    }
+
+    @Bean
+    @ConfigurationProperties("retry-config")
+    public RetryConfiguration retryConfiguration() {
+        return  new RetryConfiguration();
     }
 
     @Bean
