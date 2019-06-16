@@ -1,9 +1,9 @@
 package it.discovery.order;
 
-import it.discovery.balancer.config.CircuitBreakerConfig;
-import it.discovery.balancer.config.RetryConfiguration;
 import it.discovery.balancer.api.LoadBalancer;
 import it.discovery.balancer.client.RetryableRestTemplate;
+import it.discovery.balancer.config.CircuitBreakerConfig;
+import it.discovery.balancer.config.RetryConfiguration;
 import it.discovery.order.client.BookClient;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
