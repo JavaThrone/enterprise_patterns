@@ -10,11 +10,6 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter-api</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
@@ -22,14 +17,14 @@
 			<groupId>com.jayway.jsonpath</groupId>
 			<artifactId>json-path</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>it.discovery</groupId>
-			<artifactId>spring-boot-starter-load-balancer</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>com.github.ben-manes.caffeine</groupId>
-			<artifactId>caffeine</artifactId>
-		</dependency>
+        <!--		<dependency>-->
+        <!--			<groupId>it.discovery</groupId>-->
+        <!--			<artifactId>spring-boot-starter-load-balancer</artifactId>-->
+        <!--			<version>0.0.1-SNAPSHOT</version>-->
+        <!--		</dependency>-->
+        <!--		<dependency>-->
+        <!--			<groupId>com.github.ben-manes.caffeine</groupId>-->
+        <!--			<artifactId>caffeine</artifactId>-->
+        <!--		</dependency>-->
 	</dependencies>
 </project>

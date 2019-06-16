@@ -14,5 +14,16 @@
 		<artifactId>root</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
+    <dependencies>
+        <dependency>
+            <groupId>it.discovery</groupId>
+            <artifactId>client-balancer</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

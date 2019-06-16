@@ -1,27 +1,19 @@
 server:
   port: 9000
   zone: Ukraine
-
-cache-config:
-  maxSize: 1000
-  expiresAfterAccess: 10000
-retry-config:
-  maxAttempts: 3
-  maxDuration: 30000
-  delay: 3000
-circuit-config:
-  failureThresholds: 5
-  successThresholds: 3
-  delay: 10000
 load:
   balancer:
-    type: random
-    servers:
-      - id: primary
-        url: http://localhost:8080
-        zone: Ukraine
-        enabled: true
-      - id: slave
-        url: http://localhost:8085
-        zone: West-Europe
-        enabled: true
+    book: http://localhost:8900/
+
+#load:
+#  balancer:
+#    type: random
+#    servers:
+#      - id: primary
+#        url: http://localhost:8080
+#        zone: Ukraine
+#        enabled: true
+#      - id: slave
+#        url: http://localhost:8085
+#        zone: West-Europe
+#        enabled: true
