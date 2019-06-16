@@ -30,6 +30,7 @@ public class RetryableRestTemplate extends RestTemplate{
                 .withMaxDuration(Duration.ofMillis(
                         retryConfiguration.getMaxDuration()));
         circuitBreaker = new CircuitBreaker<>()
+                .handle(RestClientException.class)
                 .withFailureThreshold(circuitBreakerConfig.getFailureThresholds())
                 .withSuccessThreshold(circuitBreakerConfig.getSuccessThresholds())
                 .withDelay(Duration.ofMillis(circuitBreakerConfig.getDelay()));
